@@ -1,0 +1,16 @@
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\bin\Debug\tang.cdt-ec-order.exe.config
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\bin\Debug\tang.cdt-ec-order.exe
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\bin\Debug\tang.cdt-ec-order.pdb
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\bin\Debug\NPOI.dll
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Debug\tang.cdt-ec-order.csprojAssemblyReference.cache
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Debug\tang.cdt_ec_order.LoginForm.resources
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Debug\tang.cdt_ec_order.MainForm.resources
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Debug\tang.cdt_ec_order.Properties.Resources.resources
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Debug\tang.cdt-ec-order.csproj.GenerateResource.cache
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Debug\tang.cdt-ec-order.csproj.CoreCompileInputs.cache
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Debug\tang.cdt-ec-order.csproj.CopyComplete
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Debug\tang.cdt-ec-order.exe
+D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Debug\tang.cdt-ec-order.pdb
