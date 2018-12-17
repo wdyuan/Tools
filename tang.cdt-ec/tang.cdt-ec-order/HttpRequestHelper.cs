@@ -105,5 +105,47 @@ namespace tang.cdt_ec_order
         {
             return ExecRequest(url, null, "GET", cookie, encoding);
         }
+
+        /// <summary>
+        /// 文件下载
+        /// </summary>
+        /// <param name="url">所下载的路径</param>
+        /// <param name="path">本地保存的路径</param>
+        /// <param name="fileName"></param>
+        /// <param name="overwrite">当本地路径存在同名文件时是否覆盖</param>
+        public static void HttpDownloadFile(string url, string path, string fileName, bool overwrite)
+        {
+            // 设置参数
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+
+            //发送请求并获取相应回应数据
+            if (request == null) return;
+
+            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+
+            //获取文件名
+            if (response == null) return;
+
+            //直到request.GetResponse()程序才开始向目标网页发送Post请求
+            using (Stream responseStream = response.GetResponseStream())
+            {
+                //创建本地文件写入流
+                if (File.Exists(Path.Combine(path, fileName)))
+                {
+                    fileName = DateTime.Now.Ticks + fileName;
+                }
+                using (Stream stream = new FileStream(Path.Combine(path, fileName), overwrite ? FileMode.Create : FileMode.CreateNew))
+                {
+                    byte[] bArr = new byte[1024];
+
+                    int size;
+
+                    while (responseStream != null && (size = responseStream.Read(bArr, 0, bArr.Length)) > 0)
+                    {
+                        stream.Write(bArr, 0, size);
+                    }
+                }
+            }
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace tang.cdt_ec_order
 
         private const string IsUploadFileUrl = @"http://tang.cdt-ec.com/ny-mall-business/order/isUploadOrderFile?code=";
 
+        private const string DownloadFileUrl = @"http://tang.cdt-ec.com/ny-mall-business/order/downLoadOrderFileByCode?code=";
+
         private readonly List<DetailQueryResult> _detailResults = new List<DetailQueryResult>();
 
         private int _count;
@@ -141,7 +143,13 @@ namespace tang.cdt_ec_order
 
                     if (isUploadFileResult.Result.Equals("fail", StringComparison.OrdinalIgnoreCase))
                     {
-                        detailResult.IsUploadFile = "否";
+                        detailResult.IsUploadFile = false;
+                        detailResult.IsUploadFileDIsplayNote = "否";
+                    }
+                    else
+                    {
+                        detailResult.IsUploadFile = true;
+                        detailResult.IsUploadFileDIsplayNote = "是";
                     }
                 }
 
@@ -198,7 +206,7 @@ namespace tang.cdt_ec_order
                 row.CreateCell(9).SetCellValue(exportModel.DeliverAddress);
                 row.CreateCell(10).SetCellValue(exportModel.PersonName);
                 row.CreateCell(11).SetCellValue(exportModel.Mobile);
-                row.CreateCell(12).SetCellValue(exportModel.IsUploadFile);
+                row.CreateCell(12).SetCellValue(exportModel.IsUploadFileDisplayNote);
 
                 index++;
             }
@@ -210,6 +218,22 @@ namespace tang.cdt_ec_order
             using (FileStream url = File.OpenWrite(exportFileName))
             {
                 workbook.Write(url);
+            }
+
+            string uploadFilePath = $@"{dir}\附件信息";
+
+            if (!Directory.Exists(uploadFilePath))
+            {
+                Directory.CreateDirectory(uploadFilePath);
+            }
+
+            foreach (var groupModel in allExportData.Where(model => model.IsUploadFile).GroupBy(model => model.OrderId))
+            {
+                string orderId = groupModel.Key;
+
+                string fileName = $@"附件{orderId}.xls";
+
+                HttpRequestHelper.HttpDownloadFile(DownloadFileUrl + orderId, uploadFilePath, fileName, true);
             }
 
             PrintLog($@"实际生成数据：{_detailResults.Count} 条" + "\n");
