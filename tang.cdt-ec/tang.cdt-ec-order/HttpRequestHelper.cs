@@ -93,5 +93,17 @@ namespace tang.cdt_ec_order
         {
             return ExecRequest(url, postData, "POST", cookie, encoding);
         }
+
+        /// <summary>
+        /// GET方式执行请求
+        /// </summary>
+        /// <param name="url">请求URL地址，如："http://www.123.com/GetUsers"</param>
+        /// <param name="cookie"></param>
+        /// <param name="encoding">字符编码方式，如：Encoding.UTF8。默认Encoding.UTF8</param>
+        /// <returns>返回请求响应的字符串</returns>
+        public static string Get(string url, string cookie, Encoding encoding)
+        {
+            return ExecRequest(url, null, "GET", cookie, encoding);
+        }
     }
 }

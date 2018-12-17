@@ -4,6 +4,8 @@ namespace tang.cdt_ec_order
 {
     public class DetailQueryResult
     {
+        public string IsUploadFile { get; set; }
+
         public DetailDataTable DataTables { get; set; }
     }
 
@@ -67,5 +69,12 @@ namespace tang.cdt_ec_order
         public string NyPersonName { get; set; }
 
         public string Mobile { get; set; }
+    }
+
+    public class IsUploadFileResult
+    {
+        public string Msg { get; set; }
+
+        public string Result { get; set; }
     }
 }

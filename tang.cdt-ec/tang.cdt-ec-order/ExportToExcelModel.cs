@@ -30,6 +30,8 @@ namespace tang.cdt_ec_order
 
         public string Mobile { get; set; }
 
+        public string IsUploadFile { get; set; }
+
         public static List<ExportToExcelModel> Convert(DetailQueryResult detailResult)
         {
             List<ExportToExcelModel> exportModels = new List<ExportToExcelModel>();
@@ -53,7 +55,8 @@ namespace tang.cdt_ec_order
                     DeliveredNum = saleOrderDetailRow.Data.DeliveredNum,
                     DeliverAddress = saleOrderDetailRow.Data.DeliverAddress,
                     PersonName = consigneeInfo.NyPersonName,
-                    Mobile = consigneeInfo.Mobile
+                    Mobile = consigneeInfo.Mobile,
+                    IsUploadFile = detailResult.IsUploadFile
                 };
 
                 exportModels.Add(exportModel);

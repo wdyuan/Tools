@@ -4,6 +4,7 @@ using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace tang.cdt_ec_order
     public partial class MainForm : Form
     {
         private const string PostUrl = @"http://tang.cdt-ec.com/import-batch/evt/dispatch";
+
+        private const string IsUploadFileUrl = @"http://tang.cdt-ec.com/ny-mall-business/order/isUploadOrderFile?code=";
 
         private readonly List<DetailQueryResult> _detailResults = new List<DetailQueryResult>();
 
@@ -128,6 +131,20 @@ namespace tang.cdt_ec_order
 
                 DetailQueryResult detailResult = JsonConvert.DeserializeObject<DetailQueryResult>(jsonResult.Replace("_", ""));
 
+                string orderId = detailResult.DataTables.SaleOrderDataTable.Rows.First()?.Data.OrderOtherId;
+
+                if (!string.IsNullOrWhiteSpace(orderId))
+                {
+                    string isUploadResult = HttpRequestHelper.Get(IsUploadFileUrl + orderId, Cookie, Encoding.UTF8);
+
+                    IsUploadFileResult isUploadFileResult = JsonConvert.DeserializeObject<IsUploadFileResult>(isUploadResult);
+
+                    if (isUploadFileResult.Result.Equals("fail", StringComparison.OrdinalIgnoreCase))
+                    {
+                        detailResult.IsUploadFile = "否";
+                    }
+                }
+
                 _detailResults.Add(detailResult);
 
                 _count++;
@@ -161,6 +178,7 @@ namespace tang.cdt_ec_order
             row0.CreateCell(9).SetCellValue("收货地址");
             row0.CreateCell(10).SetCellValue("收货人");
             row0.CreateCell(11).SetCellValue("联系方式");
+            row0.CreateCell(12).SetCellValue("是否上传附件");
 
             int index = 1;
 
@@ -180,6 +198,7 @@ namespace tang.cdt_ec_order
                 row.CreateCell(9).SetCellValue(exportModel.DeliverAddress);
                 row.CreateCell(10).SetCellValue(exportModel.PersonName);
                 row.CreateCell(11).SetCellValue(exportModel.Mobile);
+                row.CreateCell(12).SetCellValue(exportModel.IsUploadFile);
 
                 index++;
             }
