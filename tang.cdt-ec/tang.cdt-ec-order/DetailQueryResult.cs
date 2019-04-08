@@ -6,7 +6,7 @@ namespace tang.cdt_ec_order
     {
         public bool IsUploadFile { get; set; }
 
-        public string IsUploadFileDIsplayNote { get; set; }
+        public string IsUploadFileDisplayNote { get; set; }
 
         public DetailDataTable DataTables { get; set; }
     }

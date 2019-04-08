@@ -59,7 +59,7 @@ namespace tang.cdt_ec_order
                     PersonName = consigneeInfo.NyPersonName,
                     Mobile = consigneeInfo.Mobile,
                     IsUploadFile = detailResult.IsUploadFile,
-                    IsUploadFileDisplayNote = detailResult.IsUploadFileDIsplayNote
+                    IsUploadFileDisplayNote = detailResult.IsUploadFileDisplayNote
                 };
 
                 exportModels.Add(exportModel);

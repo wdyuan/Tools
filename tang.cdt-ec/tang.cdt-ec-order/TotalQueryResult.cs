@@ -17,6 +17,8 @@ namespace tang.cdt_ec_order
     public class HeadCustom
     {
         public int UnconfirmBillCount { get; set; }
+
+        public int ConfirmedBillCount { get; set; }
     }
 
     public class HeadSaleOrderDataTable
