@@ -4,6 +4,8 @@ namespace tang.cdt_ec_order
 {
     public class DetailQueryResult
     {
+        public HeadData HeadData { get; set; }
+
         public bool IsUploadFile { get; set; }
 
         public string IsUploadFileDisplayNote { get; set; }

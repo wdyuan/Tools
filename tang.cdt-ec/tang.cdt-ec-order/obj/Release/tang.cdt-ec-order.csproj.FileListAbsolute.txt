@@ -13,4 +13,3 @@ D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Release\tang.cdt-ec-order.cs
 D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Release\tang.cdt-ec-order.csproj.CopyComplete
 D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Release\tang.cdt-ec-order.exe
 D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Release\tang.cdt-ec-order.pdb
-D:\Projects\Tools\tang.cdt-ec\tang.cdt-ec-order\obj\Release\tang.cdt-ec-order.csprojAssemblyReference.cache

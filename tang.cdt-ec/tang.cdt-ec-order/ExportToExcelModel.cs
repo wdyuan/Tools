@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +7,19 @@ namespace tang.cdt_ec_order
 {
     public class ExportToExcelModel
     {
-        public string OrderId { get; set; }
+        public string OrderNo { get; set; }
+
+        public string OtherOrderId { get; set; }
+
+        public string OrgName { get; set; }
+
+        public string OrderTime { get; set; }
+
+        public string SaleOrderDetailInfo { get; set; }
+
+        public string TotalMoney { get; set; }
+
+        public string OrderStatusName { get; set; }
 
         public string SkuCode { get; set; }
 
@@ -46,7 +59,13 @@ namespace tang.cdt_ec_order
 
                 ExportToExcelModel exportModel = new ExportToExcelModel
                 {
-                    OrderId = detailResult.DataTables.SaleOrderDataTable.Rows.First()?.Data.OrderOtherId,
+                    OrderNo = detailResult.HeadData.OrderNo,
+                    OtherOrderId = detailResult.DataTables.SaleOrderDataTable.Rows.First()?.Data.OrderOtherId,
+                    OrgName = detailResult.HeadData.OrgName,
+                    OrderTime = ConvertToDateTime(detailResult.HeadData.OrderTime).ToString("yyyy-MM-dd"),
+                    SaleOrderDetailInfo = detailResult.HeadData.SaleOrderDetailInfo,
+                    TotalMoney = detailResult.HeadData.TotalMoney,
+                    OrderStatusName = detailResult.HeadData.OrderStatusName,
                     SkuCode = saleOrderDetailRow.Data.SkuValue,
                     SkuName = saleOrderDetailRow.Data.ProductName,
                     Quantity = saleOrderDetailRow.Data.Quantity,
@@ -66,6 +85,15 @@ namespace tang.cdt_ec_order
             }
 
             return exportModels;
+        }
+
+        private static DateTime ConvertToDateTime(string timeStamp)
+        {
+            DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+
+            var toConvertValue = long.Parse(timeStamp) / 1000;
+
+            return startTime.AddSeconds(toConvertValue);
         }
     }
 }

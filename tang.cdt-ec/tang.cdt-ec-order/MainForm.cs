@@ -154,11 +154,13 @@ namespace tang.cdt_ec_order
 
                 DetailQueryResult detailResult = JsonConvert.DeserializeObject<DetailQueryResult>(jsonResult.Replace("_", ""));
 
-                string orderId = detailResult.DataTables.SaleOrderDataTable.Rows.First()?.Data.OrderOtherId;
+                detailResult.HeadData = headRow.Data;
 
-                if (!string.IsNullOrWhiteSpace(orderId))
+                string orderOtherId = headRow.Data.OrderOtherId;
+
+                if (!string.IsNullOrWhiteSpace(orderOtherId))
                 {
-                    string isUploadResult = HttpRequestHelper.Get(IsUploadFileUrl + orderId, Cookie, Encoding.UTF8);
+                    string isUploadResult = HttpRequestHelper.Get(IsUploadFileUrl + orderOtherId, Cookie, Encoding.UTF8);
 
                     IsUploadFileResult isUploadFileResult = JsonConvert.DeserializeObject<IsUploadFileResult>(isUploadResult);
 
@@ -232,7 +234,7 @@ namespace tang.cdt_ec_order
                 Directory.CreateDirectory(uploadFilePath);
             }
 
-            foreach (var groupModel in unConfirmModels.Where(model => model.IsUploadFile).GroupBy(model => model.OrderId))
+            foreach (var groupModel in unConfirmModels.Where(model => model.IsUploadFile).GroupBy(model => model.OtherOrderId))
             {
                 string orderId = groupModel.Key;
 
@@ -268,19 +270,25 @@ namespace tang.cdt_ec_order
         {
             IRow headRow = sheet.CreateRow(0);
 
-            headRow.CreateCell(0).SetCellValue("采购订单号");
-            headRow.CreateCell(1).SetCellValue("商品编码");
-            headRow.CreateCell(2).SetCellValue("商品名称");
-            headRow.CreateCell(3).SetCellValue("数量");
-            headRow.CreateCell(4).SetCellValue("单位");
-            headRow.CreateCell(5).SetCellValue("无税单价");
-            headRow.CreateCell(6).SetCellValue("含税单价");
-            headRow.CreateCell(7).SetCellValue("可发货数量");
-            headRow.CreateCell(8).SetCellValue("已发货数量");
-            headRow.CreateCell(9).SetCellValue("收货地址");
-            headRow.CreateCell(10).SetCellValue("收货人");
-            headRow.CreateCell(11).SetCellValue("联系方式");
-            headRow.CreateCell(12).SetCellValue("是否上传附件");
+            headRow.CreateCell(0).SetCellValue("销售订单号");
+            headRow.CreateCell(1).SetCellValue("采购订单号");
+            headRow.CreateCell(2).SetCellValue("采购组织");
+            headRow.CreateCell(3).SetCellValue("订单日期");
+            headRow.CreateCell(4).SetCellValue("订单内容");
+            headRow.CreateCell(5).SetCellValue("总金额");
+            headRow.CreateCell(6).SetCellValue("状态");
+            headRow.CreateCell(7).SetCellValue("商品编码");
+            headRow.CreateCell(8).SetCellValue("商品名称");
+            headRow.CreateCell(9).SetCellValue("数量");
+            headRow.CreateCell(10).SetCellValue("单位");
+            headRow.CreateCell(11).SetCellValue("无税单价");
+            headRow.CreateCell(12).SetCellValue("含税单价");
+            headRow.CreateCell(13).SetCellValue("可发货数量");
+            headRow.CreateCell(14).SetCellValue("已发货数量");
+            headRow.CreateCell(15).SetCellValue("收货地址");
+            headRow.CreateCell(16).SetCellValue("收货人");
+            headRow.CreateCell(17).SetCellValue("联系方式");
+            headRow.CreateCell(18).SetCellValue("是否上传附件");
 
             int index = 1;
 
@@ -288,19 +296,25 @@ namespace tang.cdt_ec_order
             {
                 IRow row = sheet.CreateRow(index);
 
-                row.CreateCell(0).SetCellValue(exportModel.OrderId);
-                row.CreateCell(1).SetCellValue(exportModel.SkuCode);
-                row.CreateCell(2).SetCellValue(exportModel.SkuName);
-                row.CreateCell(3).SetCellValue(exportModel.Quantity.ToString("N0"));
-                row.CreateCell(4).SetCellValue(exportModel.Unit);
-                row.CreateCell(5).SetCellValue(exportModel.Price.ToString("N2"));
-                row.CreateCell(6).SetCellValue(exportModel.TaxPrice.ToString("N2"));
-                row.CreateCell(7).SetCellValue(exportModel.Deliveryleftnum.ToString("N0"));
-                row.CreateCell(8).SetCellValue(exportModel.DeliveredNum.ToString("N0"));
-                row.CreateCell(9).SetCellValue(exportModel.DeliverAddress);
-                row.CreateCell(10).SetCellValue(exportModel.PersonName);
-                row.CreateCell(11).SetCellValue(exportModel.Mobile);
-                row.CreateCell(12).SetCellValue(exportModel.IsUploadFileDisplayNote);
+                row.CreateCell(0).SetCellValue(exportModel.OrderNo);
+                row.CreateCell(1).SetCellValue(exportModel.OtherOrderId);
+                row.CreateCell(2).SetCellValue(exportModel.OrgName);
+                row.CreateCell(3).SetCellValue(exportModel.OrderTime);
+                row.CreateCell(4).SetCellValue(exportModel.SaleOrderDetailInfo);
+                row.CreateCell(5).SetCellValue(exportModel.TotalMoney);
+                row.CreateCell(6).SetCellValue(exportModel.OrderStatusName);
+                row.CreateCell(7).SetCellValue(exportModel.SkuCode);
+                row.CreateCell(8).SetCellValue(exportModel.SkuName);
+                row.CreateCell(9).SetCellValue(exportModel.Quantity.ToString("N0"));
+                row.CreateCell(10).SetCellValue(exportModel.Unit);
+                row.CreateCell(11).SetCellValue(exportModel.Price.ToString("N2"));
+                row.CreateCell(12).SetCellValue(exportModel.TaxPrice.ToString("N2"));
+                row.CreateCell(13).SetCellValue(exportModel.Deliveryleftnum.ToString("N0"));
+                row.CreateCell(14).SetCellValue(exportModel.DeliveredNum.ToString("N0"));
+                row.CreateCell(15).SetCellValue(exportModel.DeliverAddress);
+                row.CreateCell(16).SetCellValue(exportModel.PersonName);
+                row.CreateCell(17).SetCellValue(exportModel.Mobile);
+                row.CreateCell(18).SetCellValue(exportModel.IsUploadFileDisplayNote);
 
                 index++;
             }
