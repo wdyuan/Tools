@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace tang.cdt_ec_order
 {
-    public class ExportToExcelModel
+    public class SoExportToExcelModel
     {
         public string OrderNo { get; set; }
 
@@ -47,9 +47,9 @@ namespace tang.cdt_ec_order
 
         public string IsUploadFileDisplayNote { get; set; }
 
-        public static List<ExportToExcelModel> Convert(DetailQueryResult detailResult)
+        public static List<SoExportToExcelModel> Convert(SoDetailQueryResult detailResult)
         {
-            List<ExportToExcelModel> exportModels = new List<ExportToExcelModel>();
+            List<SoExportToExcelModel> exportModels = new List<SoExportToExcelModel>();
 
             foreach (var saleOrderDetailRow in detailResult.DataTables.SaleOrderDetailDataTable.Rows)
             {
@@ -57,15 +57,15 @@ namespace tang.cdt_ec_order
 
                 ConsigneeInfo consigneeInfo = JsonConvert.DeserializeObject<ConsigneeInfo>(consigneeInfoStr);
 
-                ExportToExcelModel exportModel = new ExportToExcelModel
+                SoExportToExcelModel exportModel = new SoExportToExcelModel
                 {
-                    OrderNo = detailResult.HeadData.OrderNo,
+                    OrderNo = detailResult.HeadSoData.OrderNo,
                     OtherOrderId = detailResult.DataTables.SaleOrderDataTable.Rows.First()?.Data.OrderOtherId,
-                    OrgName = detailResult.HeadData.OrgName,
-                    OrderTime = ConvertToDateTime(detailResult.HeadData.OrderTime).ToString("yyyy-MM-dd"),
-                    SaleOrderDetailInfo = detailResult.HeadData.SaleOrderDetailInfo,
-                    TotalMoney = detailResult.HeadData.TotalMoney,
-                    OrderStatusName = detailResult.HeadData.OrderStatusName,
+                    OrgName = detailResult.HeadSoData.OrgName,
+                    OrderTime = Util.ConvertToDateTime(detailResult.HeadSoData.OrderTime).ToString("yyyy-MM-dd"),
+                    SaleOrderDetailInfo = detailResult.HeadSoData.SaleOrderDetailInfo,
+                    TotalMoney = detailResult.HeadSoData.TotalMoney,
+                    OrderStatusName = detailResult.HeadSoData.OrderStatusName,
                     SkuCode = saleOrderDetailRow.Data.SkuValue,
                     SkuName = saleOrderDetailRow.Data.ProductName,
                     Quantity = saleOrderDetailRow.Data.Quantity,
@@ -85,15 +85,6 @@ namespace tang.cdt_ec_order
             }
 
             return exportModels;
-        }
-
-        private static DateTime ConvertToDateTime(string timeStamp)
-        {
-            DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-
-            var toConvertValue = long.Parse(timeStamp) / 1000;
-
-            return startTime.AddSeconds(toConvertValue);
         }
     }
 }

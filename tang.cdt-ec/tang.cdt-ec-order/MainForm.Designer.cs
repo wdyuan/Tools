@@ -29,21 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.btnLoadData = new System.Windows.Forms.Button();
+            this.btnLoadSOData = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ResultTextBox = new System.Windows.Forms.RichTextBox();
+            this.btnLoadDOData = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnLoadData
+            // btnLoadSOData
             // 
-            this.btnLoadData.Location = new System.Drawing.Point(18, 21);
-            this.btnLoadData.Name = "btnLoadData";
-            this.btnLoadData.Size = new System.Drawing.Size(111, 25);
-            this.btnLoadData.TabIndex = 4;
-            this.btnLoadData.Text = "获取数据";
-            this.btnLoadData.UseVisualStyleBackColor = true;
-            this.btnLoadData.Click += new System.EventHandler(this.btnLoadData_Click);
+            this.btnLoadSOData.Location = new System.Drawing.Point(18, 21);
+            this.btnLoadSOData.Name = "btnLoadSOData";
+            this.btnLoadSOData.Size = new System.Drawing.Size(111, 25);
+            this.btnLoadSOData.TabIndex = 4;
+            this.btnLoadSOData.Text = "获取销售订单数据";
+            this.btnLoadSOData.UseVisualStyleBackColor = true;
+            this.btnLoadSOData.Click += new System.EventHandler(this.btnLoadSOData_Click);
             // 
             // groupBox1
             // 
@@ -63,13 +64,24 @@
             this.ResultTextBox.TabIndex = 6;
             this.ResultTextBox.Text = "";
             // 
+            // btnLoadDOData
+            // 
+            this.btnLoadDOData.Location = new System.Drawing.Point(185, 21);
+            this.btnLoadDOData.Name = "btnLoadDOData";
+            this.btnLoadDOData.Size = new System.Drawing.Size(111, 25);
+            this.btnLoadDOData.TabIndex = 7;
+            this.btnLoadDOData.Text = "获取发货管理数据";
+            this.btnLoadDOData.UseVisualStyleBackColor = true;
+            this.btnLoadDOData.Click += new System.EventHandler(this.BtnLoadDOData_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(787, 499);
+            this.Controls.Add(this.btnLoadDOData);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnLoadData);
+            this.Controls.Add(this.btnLoadSOData);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "大唐电子订单工具（科力普内部专用）";
@@ -79,9 +91,10 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnLoadData;
+        private System.Windows.Forms.Button btnLoadSOData;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox ResultTextBox;
+        private System.Windows.Forms.Button btnLoadDOData;
     }
 }
 

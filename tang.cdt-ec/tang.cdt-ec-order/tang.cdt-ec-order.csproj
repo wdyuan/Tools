@@ -53,8 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetailQueryResult.cs" />
-    <Compile Include="ExportToExcelModel.cs" />
+    <Compile Include="DoDetailQueryResult.cs" />
+    <Compile Include="DoExportToExcelModel.cs" />
+    <Compile Include="SoDetailQueryResult.cs" />
+    <Compile Include="SoExportToExcelModel.cs" />
     <Compile Include="HttpRequestHelper.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -71,6 +73,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TotalQueryResult.cs" />
+    <Compile Include="Util.cs" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>

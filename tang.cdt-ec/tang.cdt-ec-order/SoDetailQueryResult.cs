@@ -2,18 +2,18 @@
 
 namespace tang.cdt_ec_order
 {
-    public class DetailQueryResult
+    public class SoDetailQueryResult
     {
-        public HeadData HeadData { get; set; }
+        public HeadSoData HeadSoData { get; set; }
 
         public bool IsUploadFile { get; set; }
 
         public string IsUploadFileDisplayNote { get; set; }
 
-        public DetailDataTable DataTables { get; set; }
+        public SoDetailDataTable DataTables { get; set; }
     }
 
-    public class DetailDataTable
+    public class SoDetailDataTable
     {
         public SaleOrderDataTable SaleOrderDataTable { get; set; }
 
